@@ -1,0 +1,37 @@
+name : backend_test
+
+on:
+    push:
+        branches:
+            -main
+
+jobs:
+    clean:
+
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+
+            - name: installing dependencies
+              run: |
+                cd backend/spring-boot-hello-world
+                echo "installing the backend"
+                mvn clean install
+
+            - name: packaging into jar
+              run: |
+                cd backend/spring-boot-hello-world
+                echo "compiling"
+                mvn clean package
+            
+
+
+
+
+
+             
+

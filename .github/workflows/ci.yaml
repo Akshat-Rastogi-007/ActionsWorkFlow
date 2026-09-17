@@ -1,9 +1,7 @@
 name : push_ci
 
 on:
-    push:
-        branches:
-            - main
+    workflow_dispatch
 
 jobs:
     push:
