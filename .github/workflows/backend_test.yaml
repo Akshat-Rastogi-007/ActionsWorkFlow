@@ -3,7 +3,7 @@ name : backend_test
 on:
     push:
         branches:
-            -main
+            - main
 
 jobs:
     clean:
