@@ -12,7 +12,7 @@ jobs:
 
         steps:
             - name: tool
-              run: echo hostnamectl
+              run:  hostnamectl
 
             - name : disk space
               run : df -h
@@ -23,11 +23,11 @@ jobs:
             - name: tree
               run: |
                 sudo apt-get update
-                sudo apt-install -y tree
+                sudo apt install -y tree
               
             - name: display information
               run: tree -L 2 "$HOME"
-              
+
             
                 
 
