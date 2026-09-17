@@ -1,0 +1,25 @@
+name : workflow
+
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+
+
+          - name: List files
+            run: ls -la
+            
+          - name: Check Java
+            run: java -version
+
+
+    
