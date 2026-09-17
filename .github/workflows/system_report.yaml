@@ -1,0 +1,35 @@
+name: system_report
+
+on:
+    workflow_dispatch
+
+
+
+
+jobs:
+    system-info:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: tool
+              run: echo hostnamectl
+
+            - name : disk space
+              run : df -h
+
+            - name: date
+              run : date
+            
+            - name: tree
+              run: |
+                sudo apt-get update
+                sudo apt-install -y tree
+              
+            - name: display information
+              run: tree -L 2 "$HOME"
+              
+            
+                
+
+        
+
