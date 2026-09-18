@@ -38,10 +38,14 @@ jobs:
               run: ls -la
             
             - name: Install Dependencies
-              run: mvn clean install
+              run: |
+                cd backend/spring-boot-hello-world
+                mvn clean install
             
             - name: Run Unit Tests
-              run: mvn clean test   
+              run: | 
+                cd backend/spring-boot-hello-world
+                mvn clean test   
 
             - name: Display workflow trigger
               run: 'echo "Workflow triggered by: ${{ github.event_name }}"'
