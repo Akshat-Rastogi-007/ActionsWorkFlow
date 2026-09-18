@@ -27,19 +27,21 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Setup Node
-              uses: actions/setup-node@v7
+            - name: Setup Java
+              uses: actions/setup-java@v4
               with:
-                node-version: '24.x'
+                java-version: '21'
+                distribution: 'temurin'
 
+                
             - name: display file
               run: ls -la
             
             - name: Install Dependencies
-              run: npm ci
+              run: mvn clean install
             
             - name: Run Unit Tests
-              run: npm run test   
+              run: mvn clean test   
 
             - name: Display workflow trigger
               run: 'echo "Workflow triggered by: ${{ github.event_name }}"'
