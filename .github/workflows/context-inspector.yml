@@ -1,0 +1,71 @@
+name: context inspector
+
+on:
+    workflow_dispatch:
+
+env:
+
+    APP_NAME: 'Context Inspector'
+    ENVIRONMENT: 'learning'
+    MY_OVERWRITTEN_VAR: 'workflow'
+    MY_WORKFLOW_VAR: 'workflow'
+
+    
+
+jobs:
+    inspect:
+        runs-on: ubuntu-latest
+
+        env:
+            MY_JOB_VAR: 'job'
+            MY_OVERWRITTEN_VAR: 'job'
+
+        steps:
+
+            - name : Display Context information
+              run: |
+                echo "Event: ${{ github.event_name }}"
+                echo "Repository: ${{ github.repository }}"
+                echo "Branch: ${{ github.ref_name }}"
+                echo "Commit: ${{ github.sha }}"
+                echo "Actor: ${{ github.actor }}"
+                echo "Workflow: ${{ github.workflow }}"
+                echo "Run ID: ${{ github.run_id }}"
+                echo "Run Number: ${{ github.run_number }}"
+                echo "Job: ${{ github.job }}"
+                
+            - name : Github vars
+              run: echo "${{ vars.MY_VAR }}"
+
+            
+            - name: ENV variables
+              run: |
+                echo "===== ENVIRONMENT ====="
+                echo "APP_NAME: $APP_NAME"
+                echo "ENVIRONMENT: $ENVIRONMENT"
+                echo "MY_WORKFLOW_VAR: $MY_WORKFLOW_VAR"
+                echo "MY_JOB_VAR: $MY_JOB_VAR"
+                echo "MY_OVERWRITTEN_VAR: $MY_OVERWRITTEN_VAR"
+            
+            - name: overwritten value
+              run: |
+                echo "My job value: $MY_JOB_VAR"
+                echo "My Overwritten Value: $MY_OVERWRITTEN_VAR" 
+
+
+    inspect-defaults:
+
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - name: print default
+              run: |
+                echo "===== ENVIRONMENT ====="
+                echo "APP_NAME: $APP_NAME"
+                echo "ENVIRONMENT: $ENVIRONMENT"
+                echo "MY_JOB_VAR: $MY_JOB_VAR"
+                echo "MY_OVERWRITTEN_VAR: $MY_OVERWRITTEN_VAR"
+
+
+    
