@@ -1,0 +1,77 @@
+name: Deployment Gate
+
+run-name: >
+  Deploy | ${{ inputs.filename }} | ${{ inputs.environment }}
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+
+      filename:
+        description: "File to inspect"
+        required: false
+        type: string
+        default: "application.jar"
+
+      deploy:
+        description: "Deploy?"
+        required: true
+        type: boolean
+
+
+
+jobs:
+    deployment-check:
+        runs-on: ubuntu-latest       
+        
+        steps:
+            - name: Deployment Information
+              run : |
+                echo "======================="
+                echo "Deployment Information"
+                echo "======================="
+                echo "Environment: ${{ inputs.environment }}"
+                echo "File: ${{ inputs.filename }}"
+                echo "Deploy Requested: ${{ inputs.deploy }}"
+                echo "Branch: ${{ github.ref_name }}"
+                echo "Actor: ${{ github.actor }}"
+
+            - name: Production Deployment
+              if: ${{  inputs.environment == 'prod' && inputs.deploy == true && endsWith(inputs.filename, '.jar') }}  
+              run: |
+                echo "Production deployment approved"
+                echo "Deploying application.jar to production..."
+
+
+            - name: Non-Production Deployment
+              if: ${{  inputs.environment != 'prod' && inputs.deploy == true && endsWith(inputs.filename, '.jar') }}  
+              run: |
+                echo "Non-production deployment approved"
+
+            - name: Deployment Skip 
+              if: ${{  inputs.deploy == false || !endsWith(inputs.filename, '.jar') }}
+              run: echo "Deployment skipped"
+
+
+            - name: Validation
+              if: ${{ endsWith(inputs.filename, '.jar') }}
+              run: |
+               echo "Valid JAR file: true"
+
+            - name: Validation Failed
+              if: ${{ !endsWith(inputs.filename, '.jar') }}
+              run: |
+                echo "Valid JAR file: false"
+
+
+
+    

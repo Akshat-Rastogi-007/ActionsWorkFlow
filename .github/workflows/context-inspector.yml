@@ -61,7 +61,14 @@ jobs:
 
             - name: print default
               run: |
-                echo "===== ENVIRONMENT ====="
+                echo "===== ENVIRONMENT ====="==============================
+Deployment Information
+==============================
+Environment:
+File:
+Deploy requested:
+Branch:
+Actor:
                 echo "APP_NAME: $APP_NAME"
                 echo "ENVIRONMENT: $ENVIRONMENT"
                 echo "MY_JOB_VAR: $MY_JOB_VAR"
