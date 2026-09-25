@@ -1,0 +1,7 @@
+name: Akshat Rastogi
+
+roll number: s24cseu1229
+
+topic: Github Actions
+
+Status: Evaluation Completed

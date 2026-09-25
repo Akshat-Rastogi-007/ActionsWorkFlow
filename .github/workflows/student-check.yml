@@ -1,0 +1,62 @@
+name: student check
+
+
+on:
+    push:
+        branches:            
+            - main
+
+    workflow_dispatch:
+
+
+jobs:
+
+    job1:
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: print 
+              run : |
+                echo "Akshat Rastogi"
+                echo "S24cseu1229"
+                echo "${date}"
+
+                echo "${{ github.ref_name }}"
+
+            - name: File exists
+              run: |
+                [ -f "student.txt" ] && echo "File exists" || echo "File does not exist"
+
+                exit 1
+
+            - name: display file
+              run: cat student.txt
+
+            - name: Count lines in student.txt 
+              run: | 
+               echo "Number of lines:" wc -l < student.txt
+
+            - name: Search for GitHub 
+              run: |
+               echo "Searching for the word GitHub:" grep -n "GitHub" student.txt || echo "GitHub not found."  
+
+            - name: creating file
+              run: |
+                echo "Student repository verification completed" >> report.txt
+
+            - name: Upload report artifact 
+              uses: actions/upload-artifact@v4 
+              with: 
+                name: student-report
+                path: report.txt    
+
+               
+
+            
+
+              
+
