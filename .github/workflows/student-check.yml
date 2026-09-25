@@ -31,8 +31,6 @@ jobs:
               run: |
                 [ -f "student.txt" ] && echo "File exists" || echo "File does not exist"
 
-                exit 1
-
             - name: display file
               run: cat student.txt
 
